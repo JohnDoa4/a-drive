@@ -120,16 +120,16 @@
   .panel__text { font-size: 13px; }
   .panel__more-in .btn, .panel__more-in .stores { margin-top: 16px; }
 
-  /* стрілка 32×32 у правому нижньому куті; у відкритій панелі розвернута вгору
-     і стоїть на одному рівні з кнопками (по центру їх висоти) */
+  /* стрілка 44×44 у правому нижньому куті (як кнопки); у відкритій панелі розвернута вгору,
+     нижній край на одному рівні з кнопками */
   .panel__arrow {
-    display: block; position: absolute; right: 20px; bottom: 20px; width: 32px; height: 32px;
+    display: block; position: absolute; right: 20px; bottom: 20px; width: 44px; height: 44px;
     pointer-events: none;
-    transition: transform var(--dur) var(--ease), bottom var(--dur) var(--ease);
+    transition: transform var(--dur) var(--ease);
   }
-  .panel.is-open .panel__arrow { transform: rotate(180deg); bottom: 26px; }   /* центр по висоті кнопок (замірено) */
+  .panel.is-open .panel__arrow { transform: rotate(180deg); }
   /* бейджі трохи менші, щоб поряд лишилось місце під стрілку */
-  .stores { gap: 12px; }
+  .stores { gap: 12px; padding-bottom: 0; }
   .store img { height: 40px; }
 
   /* вхідна анімація: спочатку панелі висотою за текстом (заголовок + підпис + вертикальні падинги),
