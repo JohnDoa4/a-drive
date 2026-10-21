@@ -55,10 +55,10 @@
   width: max(100%, calc(50vw));
 }
 .panel__title {
-  margin: 0; font-size: 40px; font-weight: 500; line-height: 1; color: var(--pink); white-space: nowrap;
+  margin: 0; font-size: 40px; font-weight: 500; line-height: 1; color: #fff; white-space: nowrap;
   transition: font-size var(--dur) var(--ease);
 }
-.panel__sub { margin: 10px 0 0; font-size: 16px; font-weight: 500; line-height: 1.1; white-space: nowrap; }
+.panel__sub { margin: 10px 0 0; font-size: 16px; font-weight: 500; line-height: 1.1; color: #758595; white-space: nowrap; }
 .panel.is-open .panel__title { font-size: clamp(44px, 4.45vw, 64px); }
 
 /* опис + кнопка: висота розгортається разом із панеллю, текст проявляється по черзі */
