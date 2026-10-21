@@ -16,7 +16,14 @@ body { margin: 0; background: var(--bg-page, #060d13); color: #fff; font-family:
   overflow: hidden;
 }
 
-.media__gallery { position: relative; overflow: hidden; container-type: size; }
+/* розмите рожеве коло на фоні (Figma: центр на 85% ширини, діаметр ~76vw з розмиттям) */
+.media__glow {
+  position: absolute; left: 85%; top: 50%; z-index: 0;
+  width: 76.4vw; height: 76.4vw; max-width: none;
+  transform: translate(-50%, -50%); pointer-events: none;
+}
+
+.media__gallery { position: relative; z-index: 1; overflow: hidden; container-type: size; }
 
 /* повернутий на 10° блок з трьома стовпчиками; все в cqw — резина */
 .media__tilt {
@@ -56,12 +63,13 @@ body { margin: 0; background: var(--bg-page, #060d13); color: #fff; font-family:
 .media__text {
   align-self: end;
   display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
-  padding: clamp(48px, 8.3vw, 120px) clamp(24px, 2.8vw, 40px);
-  max-width: 760px;
+  position: relative; z-index: 1;
+  padding: clamp(48px, 8.3vw, 120px) 11%;   /* відступи у відсотках ширини колонки (80/724 у макеті) */
+  width: 100%;
 }
 .media__eyebrow { margin: 0; font-size: 12px; font-weight: 600; line-height: 1; letter-spacing: 2.4px; text-transform: uppercase; opacity: .8; }
-.media__title   { margin: 0; max-width: 640px; font-size: clamp(32px, 3.33vw, 52px); font-weight: 400; line-height: 1.05; letter-spacing: -0.035em; }
-.media__lead    { margin: 0; max-width: 560px; font-size: 17px; line-height: 1.65; opacity: .78; }
+.media__title   { margin: 0; font-size: clamp(34px, 4.45vw, 72px); font-weight: 400; line-height: 1.05; letter-spacing: -0.035em; }
+.media__lead    { margin: 0; font-size: 17px; line-height: 1.65; opacity: .78; }
 .media__actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
 .btn {
@@ -80,6 +88,7 @@ body { margin: 0; background: var(--bg-page, #060d13); color: #fff; font-family:
   .media { grid-template-columns: 1fr; height: auto; }
   .media__gallery { height: 420px; }
   .media__tilt { --col: 28cqw; }
+  .media__glow { left: 50%; top: 74%; width: 100vw; height: 100vw; }
   .media__text { align-self: start; padding: 40px 24px 72px; }
   .media__title { font-size: 36px; letter-spacing: -1.2px; }
 }
