@@ -88,19 +88,11 @@
 .btn--lg { padding: 16px 24px; border-radius: 10px; }
 .panel__more-in .btn { display: inline-flex; }
 
-/* кнопки магазинів застосунку */
+/* кнопки магазинів застосунку — готові SVG-картинки */
 .stores { display: flex; flex-wrap: wrap; gap: 16px; padding-bottom: 2px; }
-.store {
-  display: inline-flex; align-items: center; gap: 11px; padding: 8px 12px;
-  border: .88px solid #fff; border-radius: 10.56px;
-  transition: background-color .2s;
-}
-.store:hover { background: rgba(255, 255, 255, .12); }
-.store img { display: block; }
-.store__txt { position: relative; display: block; width: 90px; height: 23.4px; }
-.store__txt img { position: absolute; }
-.store__dl { left: .68px; top: 0; width: 82.8px; height: 7.44px; }
-.store__name { left: 0; top: 5.06px; width: 89.9px; height: 18.3px; }
+.store { display: block; border-radius: 10px; transition: opacity .2s, transform .2s; }
+.store:hover { opacity: .85; transform: translateY(-1px); }
+.store img { display: block; height: 46px; width: auto; }
 
 /* перше фото (3:2) не масштабується між станами: розмір фіксований від висоти hero,
    авто завжди по центру панелі (центр авто ≈ 47.5% ширини картинки) */
