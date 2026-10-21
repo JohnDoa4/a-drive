@@ -1,0 +1,67 @@
+/* Загальні стилі сторінки: header, footer, intro, closing */
+:root {
+  --bg-page: #060d13;
+  --white-78: rgba(255, 255, 255, .78);
+}
+
+html { scroll-behavior: smooth; }
+
+.h2 {
+  margin: 0;
+  font-size: clamp(30px, 3.33vw, 52px);
+  font-weight: 400; line-height: 1.05; letter-spacing: -0.035em;
+}
+.lead { margin: 0; font-size: 17px; line-height: 1.65; color: var(--white-78); }
+
+/* ===== Logo (шари SVG з Figma) ===== */
+.logo { position: relative; display: block; flex: none; }
+.logo img { position: absolute; display: block; max-width: none; }
+.logo__b1 { inset: 52.36% 15.14% 0.53% 35.19%; width: 49.67%; height: 47.11%; }
+.logo__a1 { inset: 0 0 52.9% 0; width: 100%; height: 47.1%; }
+.logo--header { width: 189.9px; height: 36.24px; }
+.logo--footer { width: 149.9px; height: 28.6px; mix-blend-mode: luminosity; }
+
+/* ===== Header ===== */
+.header {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 88px; padding: 0 clamp(20px, 2.8vw, 40px);
+  background: linear-gradient(to bottom, rgba(6, 13, 19, .88), rgba(6, 13, 19, 0));
+}
+.social { display: flex; gap: 10px; }
+.icon-btn {
+  display: grid; place-items: center; width: 44px; height: 44px;
+  border: 1px solid var(--pink); border-radius: 10px;
+  background: rgba(6, 13, 19, .55); color: var(--pink);
+  transition: background-color .2s, color .2s;
+}
+.icon-btn:hover { background: var(--pink); color: #fff; }
+
+/* ===== Intro / Closing ===== */
+.intro { padding-top: clamp(48px, 5.55vw, 80px); }
+.intro__text, .closing__text {
+  display: flex; flex-direction: column; gap: 24px; align-items: flex-start;
+  max-width: 740px; padding: 0 clamp(20px, 2.8vw, 40px);
+}
+.intro__text { max-width: max(740px, 55%); padding-bottom: 10px; position: relative; z-index: 1; }
+
+/* одна готова картинка (фото + градієнт) на всю ширину */
+.section-img { display: block; width: 100%; height: auto; aspect-ratio: 1440 / 400; min-height: 220px; object-fit: cover; }
+
+.closing { padding-bottom: clamp(48px, 5.55vw, 80px); }
+.closing__text { max-width: max(740px, 55%); margin-top: -10px; position: relative; }
+
+/* ===== Footer ===== */
+.footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  padding: 40px clamp(20px, 2.8vw, 40px);
+  background: var(--bg-page); border-top: 1px solid rgba(255, 255, 255, .08);
+}
+.footer__links { display: flex; flex-wrap: wrap; gap: 12px 28px; font-size: 14px; line-height: 1; }
+.footer__links a { color: var(--white-78); text-decoration: none; transition: color .2s; }
+.footer__links a:hover { color: #fff; }
+.footer__copy { margin: 0; font-size: 13px; line-height: 1; opacity: .6; }
+
+@media (max-width: 700px) {
+  .footer { flex-direction: column; align-items: flex-start; }
+}

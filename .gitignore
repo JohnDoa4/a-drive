@@ -1,0 +1,8 @@
+# рабочие материалы, не часть сайта
+Youtube/
+reference/
+
+# системное
+.DS_Store
+Thumbs.db
+node_modules/

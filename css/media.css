@@ -1,0 +1,86 @@
+:root {
+  --bg: #060d13;
+  --pink: #e31c79;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg-page, #060d13); color: #fff; font-family: 'Geologica', system-ui, sans-serif; }
+
+/* ===== Section / Media ===== */
+.media {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  height: clamp(560px, 48.6vw, 960px);
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.media__gallery { position: relative; overflow: hidden; container-type: size; }
+
+/* повернутий на 10° блок з трьома стовпчиками; все в cqw — резина */
+.media__tilt {
+  --col: 27cqw;
+  --gap: 3cqw;
+  position: absolute;
+  top: 50%; left: 50%;
+  display: flex; gap: var(--gap);
+  height: 200cqh;
+  transform: translate(-54%, -50%) rotate(10deg);
+}
+.media__col { width: var(--col); height: 100%; overflow: hidden; }
+.media__col:nth-child(2) { padding: 11cqw 0; }
+
+/* JS дублює набір картинок n разів; зсув на -100%/n = рівно один набір → безшовний цикл */
+.media__track {
+  list-style: none; margin: 0; padding: 0;
+  will-change: transform;
+  animation-duration: var(--dur, 100s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.media__col--up   .media__track { animation-name: scroll-up; }
+.media__col--down .media__track { animation-name: scroll-down; }
+.media__track li { aspect-ratio: 250 / 140.28; margin-bottom: var(--gap); }
+.media__track li.tall { aspect-ratio: 250 / 168; }
+.media__track img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+@keyframes scroll-up   { from { transform: translateY(0); }                        to { transform: translateY(calc(-100% / var(--n, 2))); } }
+@keyframes scroll-down { from { transform: translateY(calc(-100% / var(--n, 2))); } to { transform: translateY(0); } }
+
+.media__fade { position: absolute; left: 0; right: 0; height: 28cqh; pointer-events: none; z-index: 1; }
+.media__fade--top    { top: -1px;    background: linear-gradient(to bottom, var(--bg) 10%, transparent); }
+.media__fade--bottom { bottom: -1px; background: linear-gradient(to top,    var(--bg) 10%, transparent); }
+
+/* ===== Текст ===== */
+.media__text {
+  align-self: end;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
+  padding: clamp(48px, 8.3vw, 120px) clamp(24px, 2.8vw, 40px);
+  max-width: 760px;
+}
+.media__eyebrow { margin: 0; font-size: 12px; font-weight: 600; line-height: 1; letter-spacing: 2.4px; text-transform: uppercase; opacity: .8; }
+.media__title   { margin: 0; max-width: 640px; font-size: clamp(32px, 3.33vw, 52px); font-weight: 400; line-height: 1.05; letter-spacing: -0.035em; }
+.media__lead    { margin: 0; max-width: 560px; font-size: 17px; line-height: 1.65; opacity: .78; }
+.media__actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 24px; border: 2px solid var(--pink); border-radius: 10px;
+  color: #fff; font: 400 16px/1 'Geologica', sans-serif; text-decoration: none;
+  transition: background-color .2s, transform .2s;
+}
+.btn--primary { background: var(--pink); }
+.btn--primary:hover { background: #ff3a93; border-color: #ff3a93; }
+.btn--ghost:hover { background: rgba(227, 28, 121, .18); }
+.btn:active { transform: scale(.98); }
+
+/* ===== Адаптив ===== */
+@media (max-width: 1100px) {
+  .media { grid-template-columns: 1fr; height: auto; }
+  .media__gallery { height: 420px; }
+  .media__tilt { --col: 28cqw; }
+  .media__text { align-self: start; padding: 40px 24px 72px; }
+  .media__title { font-size: 36px; letter-spacing: -1.2px; }
+}
+
