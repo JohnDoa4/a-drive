@@ -77,11 +77,13 @@
 .panel__more-in > :nth-child(1) { --d: .3s; }
 .panel__more-in > :nth-child(2) { --d: .42s; }
 .panel__more-in > :nth-child(3) { --d: .54s; }
+.panel__more-in > :nth-child(4) { --d: .66s; }
 .panel.is-open .panel__text { opacity: .7; }
 
 .panel__lead { margin: 0; padding-top: 24px; font-size: 24px; font-weight: 500; line-height: 1.3; }
 .panel__text { margin: 8px 0 0; font-size: 14px; line-height: 1.5; }
-.panel__more-in .btn, .panel__more-in .stores { margin-top: 24px; }
+.panel__more-in .btn { margin-top: 24px; }
+.panel__more-in .stores { margin-top: 14px; }
 
 .btn--lg { padding: 16px 24px; border-radius: 10px; }
 .panel__more-in .btn { display: inline-flex; }
@@ -118,7 +120,8 @@
   .panel.is-open .panel__title { font-size: 44px; }
   .panel__lead { padding-top: 16px; font-size: 20px; }
   .panel__text { font-size: 13px; }
-  .panel__more-in .btn, .panel__more-in .stores { margin-top: 16px; }
+  .panel__more-in .btn { margin-top: 16px; }
+  .panel__more-in .stores { margin-top: 12px; }
 
   /* стрілка 44×44 у правому нижньому куті (як кнопки); у відкритій панелі розвернута вгору,
      нижній край на одному рівні з кнопками */
@@ -128,9 +131,6 @@
     transition: transform var(--dur) var(--ease);
   }
   .panel.is-open .panel__arrow { transform: rotate(180deg); }
-  /* бейджі трохи менші, щоб поряд лишилось місце під стрілку */
-  .stores { gap: 12px; padding-bottom: 0; }
-  .store img { height: 40px; }
 
   /* вхідна анімація: спочатку панелі висотою за текстом (заголовок + підпис + вертикальні падинги),
      потім ростуть до фінальної висоти по черзі */
