@@ -115,7 +115,11 @@
 /* ===== Мобільна: на старті всі 4 напрямки вміщені на перший екран;
    тап розкриває панель вниз (інші не стискаються, сторінка стає довшою) ===== */
 @media (max-width: 900px) {
-  .hero { --ph: max(150px, calc(100svh / 4)); flex-direction: column; height: auto; }
+  .hero {
+    --top: calc(88px * 2 / 3);   /* відступ над гармошкою = 2/3 висоти шапки */
+    --ph: max(150px, calc((100svh - var(--top)) / 4));
+    flex-direction: column; height: auto; padding-top: var(--top);
+  }
   .panel { flex: none; height: var(--ph); transition: height var(--dur) var(--ease); }
   .panel.is-open { height: max(var(--ph), 540px); }
   .panel__img { left: 0; top: 0; width: 100%; height: 100%; transform: none; transition: none; object-position: 50% 40%; }
