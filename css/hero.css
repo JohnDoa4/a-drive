@@ -98,6 +98,9 @@
   .hero { animation: hero-in 1.3s var(--ease) .15s both; }
 }
 
+/* стрілка «можна розкрити» — лише на мобільній */
+.panel__arrow { display: none; }
+
 /* ===== Мобільна: на старті всі 4 напрямки вміщені на перший екран;
    тап розкриває панель вниз (інші не стискаються, сторінка стає довшою) ===== */
 @media (max-width: 900px) {
@@ -116,6 +119,18 @@
   .panel__lead { padding-top: 16px; font-size: 20px; }
   .panel__text { font-size: 13px; }
   .panel__more-in .btn, .panel__more-in .stores { margin-top: 16px; }
+
+  /* стрілка 32×32 у правому нижньому куті; у відкритій панелі розвернута вгору
+     і стоїть на одному рівні з кнопками (по центру їх висоти) */
+  .panel__arrow {
+    display: block; position: absolute; right: 20px; bottom: 20px; width: 32px; height: 32px;
+    pointer-events: none;
+    transition: transform var(--dur) var(--ease), bottom var(--dur) var(--ease);
+  }
+  .panel.is-open .panel__arrow { transform: rotate(180deg); bottom: 26px; }   /* центр по висоті кнопок (замірено) */
+  /* бейджі трохи менші, щоб поряд лишилось місце під стрілку */
+  .stores { gap: 12px; }
+  .store img { height: 40px; }
 
   /* вхідна анімація: спочатку панелі висотою за текстом (заголовок + підпис + вертикальні падинги),
      потім ростуть до фінальної висоти по черзі */
