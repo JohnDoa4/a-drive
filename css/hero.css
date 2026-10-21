@@ -15,8 +15,6 @@
 }
 
 .panel {
-  --ix: var(--ix-d);          /* зсув картинки від центру панелі */
-  --iw: var(--iw-d, 1536px);  /* ширина картинки */
   position: relative; overflow: hidden; outline: none;
   flex: 1 1 0; min-width: 0;
   transition: flex-grow var(--dur) var(--ease);
@@ -25,23 +23,23 @@
 
 .panel__bg { position: absolute; inset: 0; background: linear-gradient(to bottom, #253746, #060d13); }
 
+/* однакові фони 3:2 (1536×1024+) для всіх панелей: по центру панелі і по горизонталі, і по вертикалі */
 .panel__img {
-  position: absolute; display: block; max-width: none; object-fit: cover; pointer-events: none;
-  left: calc(50% + var(--ix)); transform: translateX(-50%);
-  width: var(--iw); height: var(--ih, 1024px); top: var(--it, 0);
-  transition: left var(--dur) var(--ease), width var(--dur) var(--ease);
+  position: absolute; display: block; max-width: none; pointer-events: none;
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  height: calc(100% + 224px); width: auto; aspect-ratio: 3 / 2; object-fit: cover;
 }
-.hero.has-open .panel:not(.is-open) { --ix: var(--ix-c); --iw: var(--iw-c, var(--iw-d, 1536px)); }
-.hero .panel.is-open { --ix: var(--ix-o); --iw: var(--iw-o, var(--iw-d, 1536px)); }
-
-/* позиції картинок (з Figma, у px при висоті 800) */
-.panel--drive   { --iw-d: 892px; --ih: calc(100% + 132px); --it: -126px; --ix-d: 0px; --ix-c: 0px; --ix-o: 0px; }
-.panel--shop    { --ix-d: -48px;  --ix-c: 24px;  --ix-o: 0px;   --iw-d: 1536px; --ih: 1024px; --it: calc(50% - 544px); }
-.panel--service { --ix-d: -156px; --ix-c: -112px; --ix-o: -48px; --iw-d: 1460px; --ih: 820px;  --it: calc(50% - 410px); }
-.panel--app     { --ix-d: 0px;    --ix-c: 116px; --ix-o: 0px;    --iw-d: 1214px; --ih: 809px;  --it: -5px; }
 
 .panel__dim { position: absolute; inset: 0; background: #060d13; opacity: .1; transition: opacity var(--dur) var(--ease); }
 .hero.has-open .panel:not(.is-open) .panel__dim { opacity: .4; }
+
+/* dim2: горизонтальне затемнення зліва, лише у відкритій панелі (50%) */
+.panel__dim2 {
+  position: absolute; inset: 0; opacity: 0; pointer-events: none;
+  background: linear-gradient(to left, rgba(6, 13, 19, 0), #060d13);
+  transition: opacity var(--dur) var(--ease);
+}
+.panel.is-open .panel__dim2 { opacity: .5; }
 
 .panel__scrim { position: absolute; inset: 0; transition: opacity var(--dur) var(--ease); }
 .panel__scrim--a { background: linear-gradient(180deg, #060d13 0%, rgba(18, 26, 33, 0) 50%, rgba(6, 13, 19, .9) 88%, #060d13 100%); }
@@ -57,10 +55,10 @@
   width: max(100%, calc(50vw));
 }
 .panel__title {
-  margin: 0; font-size: 40px; font-weight: 400; line-height: 1; color: var(--pink); white-space: nowrap;
+  margin: 0; font-size: 40px; font-weight: 500; line-height: 1; color: var(--pink); white-space: nowrap;
   transition: font-size var(--dur) var(--ease);
 }
-.panel__sub { margin: 10px 0 0; font-size: 14px; font-weight: 500; line-height: 1.1; white-space: nowrap; }
+.panel__sub { margin: 10px 0 0; font-size: 16px; font-weight: 500; line-height: 1.1; white-space: nowrap; }
 .panel.is-open .panel__title { font-size: clamp(44px, 4.45vw, 64px); }
 
 /* опис + кнопка: висота розгортається разом із панеллю, текст проявляється по черзі */
@@ -81,7 +79,7 @@
 .panel__more-in > :nth-child(3) { --d: .54s; }
 .panel.is-open .panel__text { opacity: .7; }
 
-.panel__lead { margin: 0; padding-top: 24px; font-size: 24px; font-weight: 600; line-height: 1.3; }
+.panel__lead { margin: 0; padding-top: 24px; font-size: 24px; font-weight: 500; line-height: 1.3; }
 .panel__text { margin: 8px 0 0; font-size: 14px; line-height: 1.5; }
 .panel__more-in .btn, .panel__more-in .stores { margin-top: 24px; }
 
@@ -94,14 +92,10 @@
 .store:hover { opacity: .85; transform: translateY(-1px); }
 .store img { display: block; height: 46px; width: auto; }
 
-/* перше фото (3:2) не масштабується між станами: розмір фіксований від висоти hero,
-   авто завжди по центру панелі (центр авто ≈ 47.5% ширини картинки) */
+/* вхідна анімація (веб): гармошка розтягується від половини екрана до фінальної висоти */
+@keyframes hero-in { from { height: 50vh; } to { height: var(--hh); } }
 @media (min-width: 901px) {
-  .panel--drive .panel__img {
-    transform: none; width: auto; aspect-ratio: 3 / 2;
-    height: calc(var(--hh) + 132px);
-    left: calc(50% - 0.7125 * (var(--hh) + 132px));
-  }
+  .hero { animation: hero-in 1.3s var(--ease) .15s both; }
 }
 
 /* ===== Мобільна: на старті всі 4 напрямки вміщені на перший екран;
@@ -114,7 +108,7 @@
   }
   .panel { flex: none; height: var(--ph); transition: height var(--dur) var(--ease); }
   .panel.is-open { height: max(var(--ph), 540px); }
-  .panel__img { left: 0; top: 0; width: 100%; height: 100%; transform: none; transition: none; object-position: 50% 40%; }
+  .panel__img { left: 0; top: 0; width: 100%; height: 100%; aspect-ratio: auto; transform: none; object-position: 50% 40%; }
   .panel__content { width: 100%; padding: 20px 24px; }
   .panel__more-in { max-width: none; }
   .panel__title { font-size: 32px; }
@@ -122,4 +116,13 @@
   .panel__lead { padding-top: 16px; font-size: 20px; }
   .panel__text { font-size: 13px; }
   .panel__more-in .btn, .panel__more-in .stores { margin-top: 16px; }
+
+  /* вхідна анімація: спочатку панелі висотою за текстом (заголовок + підпис + вертикальні падинги),
+     потім ростуть до фінальної висоти по черзі */
+  .panel { animation: panel-in 1.1s var(--ease) backwards; }
+  .panel:nth-child(1) { animation-delay: .15s; }
+  .panel:nth-child(2) { animation-delay: .25s; }
+  .panel:nth-child(3) { animation-delay: .35s; }
+  .panel:nth-child(4) { animation-delay: .45s; }
 }
+@keyframes panel-in { from { height: calc(20px + 32px + 10px + 15.4px + 20px); } to { height: var(--ph); } }
