@@ -49,7 +49,6 @@ body { margin: 0; background: var(--bg-page, #060d13); color: #fff; font-family:
 .media__col--up   .media__track { animation-name: scroll-up; }
 .media__col--down .media__track { animation-name: scroll-down; }
 .media__track li { aspect-ratio: 250 / 140.28; margin-bottom: var(--gap); }
-.media__track li.tall { aspect-ratio: 250 / 168; }
 .media__track img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 @keyframes scroll-up   { from { transform: translateY(0); }                        to { transform: translateY(calc(-100% / var(--n, 2))); } }
