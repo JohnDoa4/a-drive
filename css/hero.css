@@ -103,16 +103,27 @@
 /* стрілка «можна розкрити» — лише на мобільній */
 .panel__arrow { display: none; }
 
+/* веб: тінь від кожного блока, щоб краще відділити панелі одну від одної */
+@media (min-width: 901px) {
+  .panel { box-shadow: -24px 0 40px 0 rgba(6, 13, 19, 0.90); }
+}
+
 /* ===== Мобільна: на старті всі 4 напрямки вміщені на перший екран;
    тап розкриває панель вниз (інші не стискаються, сторінка стає довшою) ===== */
 @media (max-width: 900px) {
   .hero {
-    --top: calc(88px * 2 / 3);   /* відступ над гармошкою = 2/3 висоти шапки */
+    --top: 88px;   /* відступ над гармошкою = висота шапки */
     --ph: max(150px, calc((100svh - var(--top)) / 4));
     flex-direction: column; height: auto; padding-top: var(--top);
   }
   .panel { flex: none; height: var(--ph); transition: height var(--dur) var(--ease); }
   .panel.is-open { height: max(var(--ph), 540px); }
+  /* картки, що лежать одна на одній: скошені бічні краї (внизу вужче на 16px з кожного боку,
+     скіс постійний, маска розтягується разом із висотою картки) */
+  .panel { --skew: 16px; clip-path: polygon(0 0, 100% 0, calc(100% - var(--skew)) 100%, var(--skew) 100%); }
+  /* градієнт без суцільної верхньої заливки (замість тіні між панелями) */
+  .panel__scrim--a { background: linear-gradient(180deg, rgba(6, 13, 19, 0.00) 0%, rgba(18, 26, 33, 0.00) 50%, rgba(6, 13, 19, 0.90) 88%, #060D13 100%); }
+  .panel__scrim--b { background: linear-gradient(180deg, rgba(6, 13, 19, 0.00) 0%, rgba(6, 13, 19, 0.00) 30%, rgba(6, 13, 19, 0.00) 60%, rgba(6, 13, 19, 0.90) 88%, #060D13 100%); }
   .panel__img { left: 0; top: 0; width: 100%; height: 100%; aspect-ratio: auto; transform: none; object-position: 50% 40%; }
   .panel__content { width: 100%; padding: 20px 24px; }
   .panel__more-in { max-width: none; }
