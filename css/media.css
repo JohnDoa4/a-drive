@@ -91,5 +91,6 @@ body { margin: 0; background: var(--bg-page, #060d13); color: #fff; font-family:
   .media__glow { left: 50%; top: 74%; width: 100vw; height: 100vw; }
   .media__text { align-self: start; padding: 40px 24px 72px; }
   .media__title { font-size: 36px; letter-spacing: -1.2px; }
+  .media__actions .btn { padding-inline: 16px; }
 }
 
